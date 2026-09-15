@@ -6,14 +6,14 @@ El objetivo central del proyecto es diseñar, normalizar e implementar una base 
 
 ## Alcance y Restricciones
 
-- **Dominio del problema:** el sistema debe gestionar la venta de productos o servicios (indumentaria, electrónica, repuestos automotores, librería, etc.), pudiendo seleccionarse libremente el dominio específico siempre que satisfaga los requerimientos mínimos establecidos.
-- **Límite de tablas:** el modelo debe tener complejidad suficiente para representar el dominio elegido. Como referencia, se espera un esquema de entre **6 y 10 relaciones**, pudiendo justificarse una cantidad diferente según las características del dominio.
-- **Nivel de normalización:** el esquema debe alcanzar obligatoriamente la **Tercera Forma Normal (3FN)**.
+- **Dominio del problema:** El sistema debe gestionar la venta de productos o servicios (indumentaria, electrónica, repuestos automotores, librería, etc.), pudiendo seleccionarse libremente el dominio específico siempre que satisfaga los requerimientos mínimos establecidos.
+- **Límite de tablas:** El modelo debe tener complejidad suficiente para representar el dominio elegido. Como referencia, se espera un esquema de entre **6 y 10 relaciones**, pudiendo justificarse una cantidad diferente según las características del dominio.
+- **Nivel de normalización:** El esquema debe alcanzar obligatoriamente la **Tercera Forma Normal (3FN)**.
 
 ## Etapas y Entregables
 
 ### Etapa I — Requerimientos y Dominio del Negocio
-- Descripción del caso: breve introducción al rubro elegido y alcance del sistema.
+- Descripción del caso: Breve introducción al rubro elegido y alcance del sistema.
 - Reglas de Negocio (mínimo 6), incluyendo al menos:
   - Gestión de stock
   - Registro de clientes
@@ -21,21 +21,21 @@ El objetivo central del proyecto es diseñar, normalizar e implementar una base 
   - Métodos de pago
 
 ### Etapa II — Modelado Conceptual y Lógico
-- **Diagrama Entidad-Relación (DER):** entidades, atributos, relaciones y cardinalidades (1:1, 1:N, N:M), con notación P. Chen, realizado en ERDPlus.
-- **Transformación al Modelo Relacional:** notación de tablas con claves primarias (PK) y foráneas (FK).
+- **Diagrama Entidad-Relación (DER):** Entidades, Atributos, Relaciones y Cardinalidades (1:1, 1:N, N:M), con notación P. Chen, realizado en ERDPlus.
+- **Transformación al Modelo Relacional:** Notación de tablas con claves primarias (PK) y foráneas (FK).
 - **Proceso de Normalización**, documentado paso a paso:
-  - 1FN: eliminación de grupos repetitivos y garantía de atomicidad.
-  - 2FN: eliminación de dependencias funcionales parciales en claves compuestas.
-  - 3FN: eliminación de dependencias transitivas en atributos no clave.
+  - 1FN: Eliminación de grupos repetitivos y garantía de atomicidad.
+  - 2FN: Eliminación de dependencias funcionales parciales en claves compuestas.
+  - 3FN: Eliminación de dependencias transitivas en atributos no clave.
 
 ### Etapa III — Implementación Física (Scripts SQL)
-- **Script DDL:** creación de tablas e integridad referencial (`PRIMARY KEY`, `FOREIGN KEY` con reglas de borrado/modificación), definición correcta de tipos de datos (`VARCHAR`, `DECIMAL`, `DATETIME`, etc.) y restricciones (`NOT NULL`, `UNIQUE`, `CHECK`).
-- **Script DML:** poblado inicial de la base de datos con al menos 8 a 10 registros coherentes por tabla para pruebas.
+- **Script DDL:** Creación de tablas e integridad referencial (`PRIMARY KEY`, `FOREIGN KEY` con reglas de borrado/modificación), definición correcta de tipos de datos (`VARCHAR`, `DECIMAL`, `DATETIME`, etc.) y restricciones (`NOT NULL`, `UNIQUE`, `CHECK`).
+- **Script DML:** Poblado inicial de la base de datos con al menos 8 a 10 registros coherentes por tabla para pruebas.
 
 ### Etapa IV — Consultas y Casos de Uso
-- **Factura/Comprobante:** consulta que consolide encabezado y detalle de una venta, calculando sub-totales por renglón y el total acumulado.
-- **Reporte Agregado:** total de ventas por vendedor o por categoría de producto en un rango de fechas (`GROUP BY`, `SUM`, `COUNT`).
-- **Consulta de Negocio Avanzada:** consulta que combine al menos 3 tablas mediante `JOIN` y aplique filtros condicionales (`HAVING` o subconsultas).
+- **Factura/Comprobante:** Consulta que consolide encabezado y detalle de una venta, calculando sub-totales por renglón y el total acumulado.
+- **Reporte Agregado:** Total de ventas por vendedor o por categoría de producto en un rango de fechas (`GROUP BY`, `SUM`, `COUNT`).
+- **Consulta de Negocio Avanzada:** Consulta que combine al menos 3 tablas mediante `JOIN` y aplique filtros condicionales (`HAVING` o subconsultas).
 
 ### Etapa V — Implementación de Temas Técnicos
 Investigación e implementación de componentes, mecanismos y estructuras que aportan valor crítico para que la base de datos sea robusta, rápida, segura y fácil de mantener a largo plazo.
