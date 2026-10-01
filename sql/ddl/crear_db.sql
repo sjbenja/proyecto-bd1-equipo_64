@@ -1,6 +1,6 @@
 -- =============================================================================
--- ESQUEMA DDL (Estructura Base): SkyTech Store
--- Equipo: 64
+-- ESQUEMA DDL (Completo con Restricciones): SkyTech Store
+-- Equipo:64 (Restricciones e Integridad Referencial)
 -- SGBD: Microsoft SQL Server (T-SQL)
 -- =============================================================================
 
@@ -91,4 +91,75 @@ CREATE TABLE DETALLE_PEDIDO (
     cantidad_dp INT NOT NULL,
     precio_unitario_congelado DECIMAL(10, 2) NOT NULL
 );
+GO
+
+-- -----------------------------------------------------------------------------
+-- 2. INCORPORACIÓN DE RESTRICCIONES (CONSTRAINTS) - INTEGRANTE 3
+-- -----------------------------------------------------------------------------
+
+-- Restricciones de Unicidad (UQ) y Formato (CHECK)
+ALTER TABLE USUARIO 
+    ADD CONSTRAINT uq_usuarios_email UNIQUE (email),
+        CONSTRAINT chk_email_formato CHECK (email LIKE '%@%.%');
+
+ALTER TABLE CATEGORIA 
+    ADD CONSTRAINT uq_categorias_nombre UNIQUE (nombre_categoria);
+
+ALTER TABLE PRODUCTO 
+    ADD CONSTRAINT uq_productos_sku UNIQUE (sku),
+        CONSTRAINT chk_precio_actual CHECK (precio_actual >= 0),
+        CONSTRAINT chk_stock CHECK (stock >= 0);
+
+ALTER TABLE METODOS_PAGO 
+    ADD CONSTRAINT uq_metodospago_nombre UNIQUE (nombre_metodo);
+
+ALTER TABLE CARRITO 
+    ADD CONSTRAINT chk_estado_carrito CHECK (estado_carrito IN ('Pendiente', 'Procesado', 'Cancelado'));
+
+ALTER TABLE ITEMS_CARRITO 
+    ADD CONSTRAINT uk_carrito_producto UNIQUE (carrito_id, producto_id),
+        CONSTRAINT chk_cantidad_item_carrito CHECK (cantidad > 0);
+
+ALTER TABLE PEDIDO 
+    ADD CONSTRAINT chk_monto_total CHECK (monto_total >= 0);
+
+ALTER TABLE DETALLE_PEDIDO 
+    ADD CONSTRAINT chk_cantidad_detalle CHECK (cantidad > 0),
+        CONSTRAINT chk_precio_congelado CHECK (precio_unitario_congelado >= 0);
+GO
+
+-- Restricciones de Clave Foránea (FK) e Integridad Referencial
+ALTER TABLE PRODUCTO 
+    ADD CONSTRAINT fk_productos_categorias FOREIGN KEY (categoria_id) 
+        REFERENCES CATEGORIAS(categoria_id) 
+        ON DELETE NO ACTION ON UPDATE CASCADE;
+
+ALTER TABLE CARRITO 
+    ADD CONSTRAINT fk_carritos_usuarios FOREIGN KEY (usuario_id) 
+        REFERENCES USUARIOS(usuario_id) 
+        ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE ITEMS_CARRITO 
+    ADD CONSTRAINT fk_itemscarrito_carritos FOREIGN KEY (carrito_id) 
+        REFERENCES CARRITOS(carrito_id) 
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_itemscarrito_productos FOREIGN KEY (producto_id) 
+        REFERENCES PRODUCTOS(producto_id) 
+        ON DELETE NO ACTION ON UPDATE CASCADE;
+
+ALTER TABLE PEDIDO 
+    ADD CONSTRAINT fk_pedidos_usuarios FOREIGN KEY (usuario_id) 
+        REFERENCES USUARIOS(usuario_id) 
+        ON DELETE NO ACTION ON UPDATE CASCADE,
+    CONSTRAINT fk_pedidos_metodos_pago FOREIGN KEY (metodo_pago_id) 
+        REFERENCES METODOS_PAGO(metodo_id) 
+        ON DELETE NO ACTION ON UPDATE CASCADE;
+
+ALTER TABLE DETALLE_PEDIDO 
+    ADD CONSTRAINT fk_detallepedido_pedidos FOREIGN KEY (pedido_id) 
+        REFERENCES PEDIDOS(pedido_id) 
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_detallepedido_productos FOREIGN KEY (producto_id) 
+        REFERENCES PRODUCTOS(producto_id) 
+        ON DELETE NO ACTION ON UPDATE CASCADE;
 GO
