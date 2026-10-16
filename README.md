@@ -59,8 +59,8 @@ Para cada tema técnico se debe incluir:
 | I. Requerimientos | ¿Qué necesita el negocio? | Requerimientos + reglas | Viernes 04/09 |
 | II. Modelado | ¿Cómo representamos la información? | DER + modelo relacional + 3FN | Viernes 11/09 |
 | III. Implementación | ¿Cómo construimos la BD? | DDL + DML | Miércoles 30/09 |
-| IV. Consultas | ¿Cómo obtenemos información? | SQL + casos de uso | — |
-| V. Temas técnicos | ¿Cómo hacemos la solución más robusta? | Procedimientos, funciones, transacciones, triggers, seguridad e índices | — |
+| IV. Consultas | ¿Cómo obtenemos información? | SQL + casos de uso | Viernes 16/10 |
+| V. Temas técnicos | ¿Cómo hacemos la solución más robusta? | Procedimientos, funciones, transacciones, triggers, seguridad e índices | Jueves 29/10 |
 
 ## Estructura del proyecto
 
